@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
-/* ====== Variables & Base Setup ====== */
+/* Variables & Base Setup */
 body {
-    /* STRICT REQUIREMENT: 5-color palette ONLY */
+    /* 5-color palette ONLY */
     --color-base: #0f1015;
     --color-surface: #1a1a24;
     --color-accent: #ff6a00;
@@ -194,7 +194,7 @@ main>*:nth-child(8) {
     grid-area: zone8;
 }
 
-/* ====== Visual Isolation ====== */
+/* Visual Isolation */
 header,
 footer,
 main>* {
@@ -203,6 +203,10 @@ main>* {
     border-radius: 12px;
     /* 3 visual properties applied here */
     margin-bottom: 2rem;
+}
+
+footer {
+    margin-top: 2rem;
 }
 
 main>* {
@@ -222,7 +226,7 @@ main>*:nth-child(1) {
     justify-content: space-between;
 }
 
-/* ====== Table Styling ====== */
+/* Table Styling */
 .table-wrapper {
     /* Wrapper for rounded corners */
     border-radius: 12px;
@@ -287,7 +291,7 @@ tr td:hover {
 }
 
 
-/* ====== Video Tabs / Iframe ====== */
+/* Video Tabs / Iframe*/
 .container-iframe {
     display: flex;
     flex-direction: row;
@@ -337,7 +341,7 @@ tr td:hover {
     background-color: var(--color-base);
 }
 
-/* ====== Back to Top Link ====== */
+/* Back to Top Link */
 #link-top {
     position: fixed;
     bottom: 2rem;
@@ -367,7 +371,7 @@ tr td:hover {
     /* No interior background color */
 }
 
-/* ====== Media Elements Responsiveness ====== */
+/* Media Elements Responsiveness */
 img,
 iframe,
 video {
@@ -399,7 +403,7 @@ video {
     }
 }
 
-/* ====== Custom Icons ====== */
+/* Custom Icons */
 .fa,
 .fas,
 .icon-static,
