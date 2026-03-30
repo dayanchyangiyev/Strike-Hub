@@ -126,9 +126,10 @@ main {
     /* Decreases in media queries */
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-        "zone1 zone1 zone2"
-        "zone3 zone4 zone5"
-        "zone6 zone7 zone8";
+        "zone1 zone1 zone1 zone1"
+        "zone8 zone8 zone8 zone8"
+        "zone3 zone2 zone2 zone4"
+        "zone5 zone6 zone7 zone7";
 }
 
 @media (max-width: 1024px) {
@@ -137,10 +138,10 @@ main {
         grid-template-columns: 1fr 1fr;
         /* Different multi-column layout */
         grid-template-areas:
-            "zone1 zone2"
-            "zone3 zone4"
-            "zone5 zone6"
-            "zone7 zone8";
+            "zone1 zone1 zone1"
+            "zone8 zone8 zone8"
+            "zone3 zone2 zone 4"
+            "zone5 zone6 zone7";
     }
 }
 
@@ -151,13 +152,13 @@ main {
         /* NO columns on Mobile */
         grid-template-areas:
             "zone1"
+            "zone8"
             "zone2"
             "zone3"
             "zone4"
             "zone5"
             "zone6"
-            "zone7"
-            "zone8";
+            "zone7";
     }
 }
 
@@ -347,15 +348,41 @@ tr td:hover {
     bottom: 2rem;
     right: 2rem;
     background-color: var(--color-surface);
-    padding: 1.25rem;
-    border: 2px solid var(--color-accent);
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0; /* Not a circle anymore */
+    border: none;
+    opacity: 0.7; /* Opacity set to 70% */
+    transition: all 0.3s ease;
     z-index: 1000;
+}
+
+#link-top::before {
+    content: "(";
+    color: var(--color-accent);
+    font-size: 2rem;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#link-top::after {
+    content: ")";
+    color: var(--color-accent);
+    font-size: 2rem;
+    margin-left: 10px;
+    font-weight: bold;
 }
 
 #link-top:hover {
     background-color: var(--color-accent);
+    opacity: 1; /* Fade in on hover */
+}
+
+#link-top:hover::before,
+#link-top:hover::after {
+    color: var(--color-text); /* Brackets color changes on hover */
 }
 
 /* CSS Triangle Trick */
@@ -368,7 +395,11 @@ tr td:hover {
     border-top: 10px solid transparent;
     border-bottom: 15px solid var(--color-text);
     background-color: transparent;
-    /* No interior background color */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+#link-top:hover #triunghi {
+    transform: translateY(-4px); /* Triangle goes a little bit up on hover */
 }
 
 /* Media Elements Responsiveness */
