@@ -1,0 +1,280 @@
+// SCSS Navigation Menu - StrikeHub
+// ============================================
+// 1. SCSS Variables
+// ============================================
+$transition-speed: 0.3s;
+$dropdown-bg: var(--color-surface);
+$nav-text: var(--color-text);
+$nav-accent: var(--color-accent);
+$nav-base: var(--color-base);
+
+// ============================================
+// 2. SCSS @extend Templates (Reusability)
+// ============================================
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%nav-button {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  color: $nav-text;
+  transition: all $transition-speed ease;
+}
+
+// Reset header wrapper
+.site-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+// ============================================
+// 3. Checkbox Hack Elements (Mobile Toggle)
+// ============================================
+#nav-toggle {
+  display: none; // Hidden HTML checkbox
+}
+
+.nav-toggle-label {
+  display: none; // Hidden on desktop viewport
+  cursor: pointer;
+  font-size: 2.5rem;
+  color: $nav-accent;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color $transition-speed ease;
+  
+  &:hover {
+    background-color: var(--color-surface);
+  }
+}
+
+// ============================================
+// 4. Main Navigation Structure (Deep Nesting)
+// ============================================
+.main-nav {
+  .nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .nav-item {
+      position: relative;
+
+      .nav-link {
+        @extend %flex-center;
+        @extend %nav-button;
+        gap: 0.5rem; // Space between Font Awesome icon and text
+        background-color: $nav-base;
+        border: 2px solid $nav-accent;
+
+        // Desktop Layout: Hover Text Scale (Transform)
+        &:hover {
+          background-color: $nav-accent;
+          color: $nav-base;
+
+          .nav-text {
+            transform: scale(1.15); // Gradually scales up text natively
+          }
+        }
+
+        .nav-text {
+          display: inline-block;
+          transition: transform $transition-speed ease;
+        }
+      }
+
+      // Definition for Nested Top-Level Elements
+      &.has-dropdown {
+        .dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          list-style: none;
+          margin: 0;
+          padding: 0.5rem;
+          margin-top: 0.5rem;
+          background-color: $dropdown-bg;
+          border: 2px solid $nav-accent;
+          border-radius: 8px;
+          min-width: 14rem;
+          z-index: 1000;
+          
+          // Desktop Layout: Submenu Vertical Scale Opening
+          transform: scaleY(0);
+          transform-origin: top;
+          transition: transform $transition-speed ease;
+
+          li {
+            position: relative;
+            transform: translateY(-10px); // Start slightly elevated
+            opacity: 0; // Starts invisible
+            transition: all $transition-speed ease;
+            
+            a {
+              @extend %nav-button;
+              display: block; // Emulate full-width container bounds
+              background-color: transparent;
+              padding: 0.75rem 1rem;
+              position: relative; // Key context for the ::before/::after elements
+              border: none;
+              overflow: hidden; // Ensures gradient bars don't spill out
+              
+              // Grading Criteria: Submenu Gradient Hover Bars
+              &::before, &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0;
+                width: 4px;
+                height: 0; // Explicitly starts at height 0
+                background: linear-gradient(to bottom, white, black);
+                transition: height $transition-speed ease;
+              }
+              
+              &::before { left: 0; }
+              &::after { right: 0; }
+
+              &:hover {
+                background-color: rgba(255, 106, 0, 0.2); // Light emphasis layer
+                color: $nav-accent;
+                
+                // Heights scale dynamically from 0 to 100% bounds
+                &::before, &::after {
+                  height: 100%;
+                }
+              }
+            }
+          }
+        }
+
+        // Submenu Visibility Toggle on Desktop
+        &:hover {
+          .dropdown-menu {
+            transform: scaleY(1); // Scaled vertically to full bounding height
+            
+            li {
+              opacity: 1;
+              transform: translateY(0); // Sinks in items staggered via @for loop
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// 5. SCSS @for Loop (Staggered Animation Delays)
+// ============================================
+@for $item from 1 through 10 {
+  // Generates unique delays per list item down the dropdown queue!
+  .nav-item.has-dropdown:hover .dropdown-menu li:nth-child(#{$item}) {
+    transition-delay: #{$item * 0.08}s;
+  }
+}
+
+// ============================================
+// 6. Responsive Behaviors & Breakpoints
+// ============================================
+
+// B. Tablet View (Medium Screen)
+@media (max-width: 1024px) {
+  .main-nav {
+    .nav-list {
+      .nav-item {
+        .nav-link {
+          font-size: 0.85rem; // Decrease main visual font size
+
+          // Icon-Only Execution
+          .nav-text {
+            display: none !important; // Eliminates words, preserves FA icons
+          }
+        }
+      }
+    }
+  }
+}
+
+// C. Mobile View (Small Screen)
+@media (max-width: 768px) {
+  // Triggers Hamburger Menu Rendering
+  .nav-toggle-label {
+    display: block; 
+  }
+  
+  .main-nav {
+    display: none; // Off by default (managed by HTML checkbox input)
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: $nav-base;
+    border-bottom: 2px solid $nav-accent;
+    z-index: 1005; // Ensures priority layout
+    
+    .nav-list {
+      flex-direction: column; // Transforms layout to block vertical
+      align-items: stretch;
+      padding: 1rem;
+      gap: 0.5rem;
+
+      .nav-item {
+        width: 100%;
+        
+        .nav-link {
+          justify-content: flex-start;
+          
+          // Re-establish text fields over standard mobile menus
+          .nav-text {
+            display: inline-block !important; 
+          }
+        }
+
+        // Home Custom Replacement Validation
+        // Eliminates text specific to Home leaving only House Icon
+        &.home-item .nav-link .nav-text {
+          display: none !important; 
+        }
+        
+        &.has-dropdown {
+          .dropdown-menu {
+            position: relative; // Pushes content downwards
+            top: 0;
+            width: 100%;
+            margin-top: 0.25rem;
+            
+            // Re-written transition rules: Mobile Submenu opening via X scale
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform $transition-speed ease;
+          }
+
+          // Active hover scales horizontally to right edge
+          &:hover {
+            .dropdown-menu {
+              transform: scaleX(1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // The Checkbox Hack Trigger!
+  // If the toggle input is checked (user clicks hamburger label), the sibling `.main-nav` appears
+  #nav-toggle:checked ~ .main-nav {
+    display: block;
+  }
+}

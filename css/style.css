@@ -126,10 +126,11 @@ main {
     /* Decreases in media queries */
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-        "zone1 zone1 zone1 zone1"
-        "zone8 zone8 zone8 zone8"
-        "zone3 zone2 zone2 zone4"
-        "zone5 zone6 zone7 zone7";
+        "zone1 zone1 zone1"
+        "zone8 zone8 zone8"
+        "zone3 zone2 zone2"
+        "zone4 zone2 zone2"
+        "zone5 zone6 zone7";
 }
 
 @media (max-width: 1024px) {
@@ -138,10 +139,12 @@ main {
         grid-template-columns: 1fr 1fr;
         /* Different multi-column layout */
         grid-template-areas:
-            "zone1 zone1 zone1"
-            "zone8 zone8 zone8"
-            "zone3 zone2 zone 4"
-            "zone5 zone6 zone7";
+            "zone1 zone1"
+            "zone8 zone8"
+            "zone3 zone2"
+            "zone4 zone2"
+            "zone5 zone6"
+            "zone7 zone7";
     }
 }
 
@@ -215,9 +218,7 @@ main>* {
     /* Layout handled by grid gaps inside main */
 }
 
-header {
-    margin-top: 2rem;
-}
+
 
 /* Zone1 internal Z-pattern */
 main>*:nth-child(1) {
@@ -261,6 +262,7 @@ th {
 
 th,
 td {
+    padding: var(--text-padding);
     border-bottom: 1px solid var(--color-muted);
 }
 
@@ -352,7 +354,7 @@ tr td:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0; /* Not a circle anymore */
+    border-radius: 0; 
     border: none;
     opacity: 0.7; /* Opacity set to 70% */
     transition: all 0.3s ease;
@@ -399,7 +401,7 @@ tr td:hover {
 }
 
 #link-top:hover #triunghi {
-    transform: translateY(-4px); /* Triangle goes a little bit up on hover */
+    transform: translateY(-6px); 
 }
 
 /* Media Elements Responsiveness */
