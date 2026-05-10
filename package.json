@@ -1,0 +1,25 @@
+{
+  "name": "strike-hub",
+  "version": "1.0.0",
+  "description": "Strike-Hub este o platforma dedicata comunitatii, construita de si pentru jucatorii pasionati de Counter-Strike. Serveste ca un hub central unde fanii se pot conecta, pot impartasi strategii, discuta despre cele mai recente noutati din esports si gasi usor coechipieri pentru urmatorul lor meci. Fie ca esti un jucator ocazional care vrea sa-si impartaseasca cele mai bune clipuri clutch sau un veteran competitiv in cautarea unei echipe dedicate, site-ul iti ofera toate instrumentele de care ai nevoie. In cele din urma, Strike-Hub este conceput pentru a uni baza de jucatori de CS intr-un mediu captivant, plin de resurse si activ.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dayanchyangiyev/Strike-Hub.git"
+  },
+  "keywords": [],
+  "author": "Dayanch Yangiyev",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dayanchyangiyev/Strike-Hub/issues"
+  },
+  "homepage": "https://github.com/dayanchyangiyev/Strike-Hub#readme",
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^5.2.1"
+  }
+}

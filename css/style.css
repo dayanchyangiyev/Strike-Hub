@@ -354,9 +354,10 @@ tr td:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0; 
+    border-radius: 0;
     border: none;
-    opacity: 0.7; /* Opacity set to 70% */
+    opacity: 0.7;
+    /* Opacity set to 70% */
     transition: all 0.3s ease;
     z-index: 1000;
 }
@@ -379,12 +380,14 @@ tr td:hover {
 
 #link-top:hover {
     background-color: var(--color-accent);
-    opacity: 1; /* Fade in on hover */
+    opacity: 1;
+    /* Fade in on hover */
 }
 
 #link-top:hover::before,
 #link-top:hover::after {
-    color: var(--color-text); /* Brackets color changes on hover */
+    color: var(--color-text);
+    /* Brackets color changes on hover */
 }
 
 /* CSS Triangle Trick */
@@ -397,11 +400,12 @@ tr td:hover {
     border-top: 10px solid transparent;
     border-bottom: 15px solid var(--color-text);
     background-color: transparent;
-    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+    transition: transform 0.3s ease;
+    /* Smooth transition for hover effect */
 }
 
 #link-top:hover #triunghi {
-    transform: translateY(-6px); 
+    transform: translateY(-6px);
 }
 
 /* Media Elements Responsiveness */
@@ -457,5 +461,161 @@ video {
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+
+/* CSS PRINTARE*/
+
+@media print {
+
+    /* Margini de pagină alternante */
+    @page :left {
+        margin-left: 3cm;
+        margin-right: 1cm;
+    }
+
+    @page :right {
+        margin-left: 1cm;
+        margin-right: 3cm;
+    }
+
+    /* Elimina fundaluri de baza vizibile care consuma cerneala */
+    body {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    /* 2. Banner pe prima pagina, declarat in HTML footer */
+    /* Deoarece se cere pe prima pagina, se fortează absolute fata de document radacina (apoi ~28.5cm e marja inaltimii peisajului A4 portrait) */
+    #print-banner {
+        display: block !important;
+        position: absolute;
+        top: calc(28cm - 60px);
+        left: 15%;
+        /* 70% width centrat inseamna 15% stanga + 15% dreapta */
+        width: 70%;
+        border: 4px inset black;
+        text-align: center;
+        padding: 0.75rem 1.25rem; /* Breathing room so text doesn't touch border */
+        font-weight: bold;
+        background-color: white;
+        color: black;
+        margin: 0;
+    }
+
+    /* 3. Ascunderea structurilor media si butoane/linkuri dependente inutile in fizic */
+    img,
+    video,
+    iframe,
+    figure,
+    picture,
+    .fa-solid,
+    .icon-static,
+    .icon-animated,
+    #link-top,
+    .nav-toggle,
+    .nav-toggle-label {
+        display: none !important;
+    }
+
+    /* 4. Transformarea grilei in block pentru prevenirea sectionarii */
+    main {
+        display: block !important;
+    }
+
+    main>* {
+        page-break-inside: avoid;
+        /* Opreste fragmentarea zonelor */
+        display: block !important;
+        margin-bottom: 1.5rem;
+        border: 1px solid black !important;
+        /* Transformam marginile UI in print curat */
+    }
+
+    /* 5. Toate linkurile redevin simplu text ignorand tematica web */
+    a {
+        color: black !important;
+        text-decoration: none !important;
+        background: none !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+
+    /* 6. Setări Heading 1 si Meniu Minimalist Vertical */
+    h1 {
+        text-align: center;
+        page-break-inside: avoid;
+    }
+
+    .site-header {
+        display: block !important;
+        /* Sterge flexbox din antet */
+    }
+
+    .main-nav .nav-list,
+    nav>ul {
+        display: block !important;
+        margin: 0;
+        padding: 0;
+    }
+
+    .main-nav .nav-list .nav-item,
+    nav>ul>li {
+        display: block !important;
+        border: none !important;
+        padding: 8px 0 !important;
+        text-align: left;
+    }
+
+    .nav-link {
+        display: block !important;
+    }
+
+    /* Intreruperea recursivitatii (ascunderea submeniurilor explicit) */
+    .dropdown-menu,
+    nav li ul {
+        display: none !important;
+    }
+
+    /* 7 & 8. Rupturi de Pagina logice */
+    nav,
+    .main-nav {
+        page-break-after: always;
+        /* Trecem la sectiuni pe o pagină noua după liste */
+    }
+
+    footer {
+        page-break-before: always;
+        /* Pastram un element de informare fizica separat pe alta foaie */
+    }
+
+    /* 9. Watermark Fixed pe toate paginile printate */
+    #print-watermark {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        /* Centrare pe axă */
+
+        position: fixed;
+        bottom: 0;
+        right: 0;
+
+        width: 4cm;
+        min-height: 1cm;
+
+        border: 3px solid black;
+        border-radius: 8px;
+        font-weight: bold;
+        text-align: center;
+        opacity: 0.4;
+        padding: 0.15cm 0.25cm; /* Inner breathing room — text no longer touches borders */
+
+        background-color: white;
+        color: black;
+        font-size: 9px; /* Slightly smaller so two-line name fits in 4cm width */
+        line-height: 1.3;
+        z-index: 9999;
     }
 }

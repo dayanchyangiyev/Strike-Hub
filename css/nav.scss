@@ -1,16 +1,15 @@
 // SCSS Navigation Menu - StrikeHub
-// ============================================
+
 // 1. SCSS Variables
-// ============================================
 $transition-speed: 0.3s;
 $dropdown-bg: var(--color-surface);
 $nav-text: var(--color-text);
 $nav-accent: var(--color-accent);
 $nav-base: var(--color-base);
 
-// ============================================
-// 2. SCSS @extend Templates (Reusability)
-// ============================================
+
+// 2. SCSS @extend Templates
+
 %flex-center {
   display: flex;
   align-items: center;
@@ -36,9 +35,7 @@ $nav-base: var(--color-base);
   padding-bottom: 1rem;
 }
 
-// ============================================
 // 3. Checkbox Hack Elements (Mobile Toggle)
-// ============================================
 #nav-toggle {
   display: none; // Hidden HTML checkbox
 }
@@ -51,15 +48,14 @@ $nav-base: var(--color-base);
   padding: 0.5rem;
   border-radius: 8px;
   transition: background-color $transition-speed ease;
-  
+
   &:hover {
     background-color: var(--color-surface);
   }
 }
 
-// ============================================
 // 4. Main Navigation Structure (Deep Nesting)
-// ============================================
+
 .main-nav {
   .nav-list {
     list-style: none;
@@ -110,7 +106,7 @@ $nav-base: var(--color-base);
           border-radius: 8px;
           min-width: 14rem;
           z-index: 1000;
-          
+
           // Desktop Layout: Submenu Vertical Scale Opening
           transform: scaleY(0);
           transform-origin: top;
@@ -121,7 +117,7 @@ $nav-base: var(--color-base);
             transform: translateY(-10px); // Start slightly elevated
             opacity: 0; // Starts invisible
             transition: all $transition-speed ease;
-            
+
             a {
               @extend %nav-button;
               display: block; // Emulate full-width container bounds
@@ -130,9 +126,10 @@ $nav-base: var(--color-base);
               position: relative; // Key context for the ::before/::after elements
               border: none;
               overflow: hidden; // Ensures gradient bars don't spill out
-              
+
               // Grading Criteria: Submenu Gradient Hover Bars
-              &::before, &::after {
+              &::before,
+              &::after {
                 content: '';
                 display: block;
                 position: absolute;
@@ -142,16 +139,22 @@ $nav-base: var(--color-base);
                 background: linear-gradient(to bottom, white, black);
                 transition: height $transition-speed ease;
               }
-              
-              &::before { left: 0; }
-              &::after { right: 0; }
+
+              &::before {
+                left: 0;
+              }
+
+              &::after {
+                right: 0;
+              }
 
               &:hover {
                 background-color: rgba(255, 106, 0, 0.2); // Light emphasis layer
                 color: $nav-accent;
-                
+
                 // Heights scale dynamically from 0 to 100% bounds
-                &::before, &::after {
+                &::before,
+                &::after {
                   height: 100%;
                 }
               }
@@ -163,7 +166,7 @@ $nav-base: var(--color-base);
         &:hover {
           .dropdown-menu {
             transform: scaleY(1); // Scaled vertically to full bounding height
-            
+
             li {
               opacity: 1;
               transform: translateY(0); // Sinks in items staggered via @for loop
@@ -175,20 +178,18 @@ $nav-base: var(--color-base);
   }
 }
 
-// ============================================
+
 // 5. SCSS @for Loop (Staggered Animation Delays)
-// ============================================
 @for $item from 1 through 10 {
+
   // Generates unique delays per list item down the dropdown queue!
   .nav-item.has-dropdown:hover .dropdown-menu li:nth-child(#{$item}) {
     transition-delay: #{$item * 0.08}s;
   }
 }
 
-// ============================================
-// 6. Responsive Behaviors & Breakpoints
-// ============================================
 
+// 6. Responsive Behaviors & Breakpoints
 // B. Tablet View (Medium Screen)
 @media (max-width: 1024px) {
   .main-nav {
@@ -209,11 +210,12 @@ $nav-base: var(--color-base);
 
 // C. Mobile View (Small Screen)
 @media (max-width: 768px) {
+
   // Triggers Hamburger Menu Rendering
   .nav-toggle-label {
-    display: block; 
+    display: block;
   }
-  
+
   .main-nav {
     display: none; // Off by default (managed by HTML checkbox input)
     position: absolute;
@@ -223,7 +225,7 @@ $nav-base: var(--color-base);
     background-color: $nav-base;
     border-bottom: 2px solid $nav-accent;
     z-index: 1005; // Ensures priority layout
-    
+
     .nav-list {
       flex-direction: column; // Transforms layout to block vertical
       align-items: stretch;
@@ -232,29 +234,29 @@ $nav-base: var(--color-base);
 
       .nav-item {
         width: 100%;
-        
+
         .nav-link {
           justify-content: flex-start;
-          
+
           // Re-establish text fields over standard mobile menus
           .nav-text {
-            display: inline-block !important; 
+            display: inline-block !important;
           }
         }
 
         // Home Custom Replacement Validation
         // Eliminates text specific to Home leaving only House Icon
         &.home-item .nav-link .nav-text {
-          display: none !important; 
+          display: none !important;
         }
-        
+
         &.has-dropdown {
           .dropdown-menu {
             position: relative; // Pushes content downwards
             top: 0;
             width: 100%;
             margin-top: 0.25rem;
-            
+
             // Re-written transition rules: Mobile Submenu opening via X scale
             transform: scaleX(0);
             transform-origin: left;
@@ -274,7 +276,7 @@ $nav-base: var(--color-base);
 
   // The Checkbox Hack Trigger!
   // If the toggle input is checked (user clicks hamburger label), the sibling `.main-nav` appears
-  #nav-toggle:checked ~ .main-nav {
+  #nav-toggle:checked~.main-nav {
     display: block;
   }
 }
