@@ -1,0 +1,55 @@
+    <header class="site-header">
+        <h1><i class="fa-solid fa-crosshairs icon-animated"></i> StrikeHub</h1>
+        
+        <!-- Checkbox Hack for Mobile Menu -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label">
+            <i class="fa-solid fa-bars"></i>
+        </label>
+
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <!-- Top Level 1: Home (Icon Replacement mapped to home-item class) -->
+                <li class="nav-item home-item">
+                    <a class="nav-link" href="#hero">
+                        <i class="fa-solid fa-house"></i> 
+                        <span class="nav-text">Prima pagină</span>
+                    </a>
+                </li>
+                
+                <!-- Top Level 2: Marketplace (Grouped Pages Dropdown) -->
+                <li class="nav-item has-dropdown">
+                    <a class="nav-link" href="#marketplace">
+                        <i class="fa-solid fa-store"></i> 
+                        <span class="nav-text">Marketplace</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="pistols.html">Pistols</a></li>
+                        <li><a href="rifles.html">Rifles</a></li>
+                        <li><a href="knives.html">Knives</a></li>
+                    </ul>
+                </li>
+
+                <!-- Top Level 3: Strat-Book (In-Page Anchors Dropdown) -->
+                <li class="nav-item has-dropdown">
+                    <a class="nav-link" href="#strat-book">
+                        <i class="fa-solid fa-book-journal-whills"></i> 
+                        <span class="nav-text">Strat-Book</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#mirage">#mirage</a></li>
+                        <li><a href="#inferno">#inferno</a></li>
+                        <li><a href="#smokes">#smokes</a></li>
+                    </ul>
+                </li>
+
+                <!-- Top Level 4: Creative Zone Active Link -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#pro-scene">
+                        <i class="fa-solid fa-video"></i> 
+                        <span class="nav-text">Pro-Scene</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>

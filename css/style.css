@@ -112,7 +112,7 @@ h6,
 blockquote,
 dt,
 dd {
-    padding: var(--text-padding);
+    margin-bottom: var(--text-padding);
 }
 
 a {
@@ -205,12 +205,27 @@ main>* {
     background-color: var(--color-surface);
     border: 2px solid var(--color-accent);
     border-radius: 12px;
-    /* 3 visual properties applied here */
+    padding: 1.5rem;
     margin-bottom: 2rem;
 }
 
 footer {
     margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+footer address {
+    font-style: normal;
+    line-height: 1.8;
+}
+
+footer address a {
+    display: inline-block;
+    margin-bottom: 0.5rem;
 }
 
 main>* {
@@ -220,12 +235,18 @@ main>* {
 
 
 
-/* Zone1 internal Z-pattern */
+/* Zone1 internal layout */
 main>*:nth-child(1) {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    text-align: center;
+    gap: 2rem;
+}
+
+main>*:nth-child(1) > * {
+    width: 100%;
+    max-width: 800px;
 }
 
 /* Table Styling */
@@ -251,7 +272,7 @@ table {
 
 caption {
     caption-side: bottom;
-    padding: var(--text-padding);
+    padding-top: var(--text-padding);
     color: var(--color-muted);
 }
 
@@ -418,6 +439,10 @@ video {
     min-width: 250px;
     height: auto;
     display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    border: 2px solid var(--color-accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 1024px) {
@@ -445,8 +470,12 @@ video {
 .fas,
 .icon-static,
 .icon-animated {
-    padding: var(--text-padding);
+    margin-right: 0.5rem;
     color: var(--color-accent);
+}
+
+.icon-static,
+.icon-animated {
     font-size: 2.5rem;
 }
 
@@ -466,6 +495,11 @@ video {
 
 
 /* CSS PRINTARE*/
+
+#print-watermark,
+#print-banner {
+    display: none;
+}
 
 @media print {
 

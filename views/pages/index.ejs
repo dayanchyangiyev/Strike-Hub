@@ -1,73 +1,8 @@
 <!DOCTYPE html>
 <html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Student UAB">
-    <meta name="keywords" content="CS2, Counter-Strike 2, CS2 skins, skin marketplace, buy CS2 skins, CS2 strats, smoke lineups, esports tracker, StrikeHub, gaming hub, CS2 inventory">
-    <meta name="description" content="StrikeHub este cel mai complex portal pentru fanii Counter-Strike 2, oferind un marketplace avansat pentru skin-uri, tactici și detalii despre turnee">
-    <meta name="msapplication-TileColor" content="#ff8c00">
-    <title>StrikeHub - Platforma Globală pentru Counter-Strike 2</title>
-    <link rel="icon" href="resurse/ico/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js" defer></script>
-</head>
+<%- include('../fragments/head') %>
 <body id="sus">
-    <header class="site-header">
-        <h1><i class="fa-solid fa-crosshairs icon-animated"></i> StrikeHub</h1>
-        
-        <!-- Checkbox Hack for Mobile Menu -->
-        <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <label for="nav-toggle" class="nav-toggle-label">
-            <i class="fa-solid fa-bars"></i>
-        </label>
-
-        <nav class="main-nav">
-            <ul class="nav-list">
-                <!-- Top Level 1: Home (Icon Replacement mapped to home-item class) -->
-                <li class="nav-item home-item">
-                    <a class="nav-link" href="#hero">
-                        <i class="fa-solid fa-house"></i> 
-                        <span class="nav-text">Prima pagină</span>
-                    </a>
-                </li>
-                
-                <!-- Top Level 2: Marketplace (Grouped Pages Dropdown) -->
-                <li class="nav-item has-dropdown">
-                    <a class="nav-link" href="#marketplace">
-                        <i class="fa-solid fa-store"></i> 
-                        <span class="nav-text">Marketplace</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="pistols.html">Pistols</a></li>
-                        <li><a href="rifles.html">Rifles</a></li>
-                        <li><a href="knives.html">Knives</a></li>
-                    </ul>
-                </li>
-
-                <!-- Top Level 3: Strat-Book (In-Page Anchors Dropdown) -->
-                <li class="nav-item has-dropdown">
-                    <a class="nav-link" href="#strat-book">
-                        <i class="fa-solid fa-book-journal-whills"></i> 
-                        <span class="nav-text">Strat-Book</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#mirage">#mirage</a></li>
-                        <li><a href="#inferno">#inferno</a></li>
-                        <li><a href="#smokes">#smokes</a></li>
-                    </ul>
-                </li>
-
-                <!-- Top Level 4: Creative Zone Active Link -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#pro-scene">
-                        <i class="fa-solid fa-video"></i> 
-                        <span class="nav-text">Pro-Scene</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+<%- include('../fragments/header') %>
 
     <main>
         <!-- Child 1: Welcome to StrikeHub poster -->
@@ -181,17 +116,21 @@
             <p>Folosește chiar pe StrikeHub propriul nostru <b title="Monitor competiții">esports tracker</b> pentru a prelua rezultatele, sau aplică un set clar de <b title="Planuri strategice">CS2 strats</b> inovative dezvoltate online de comunitate.</p>
         </section>
 
-        <!-- Child 6: User Stats -->
-        <section id="user-stats">
-            <h2>Performanțe și Statistici <i class="fa-solid fa-medal icon-static"></i></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel ultrices lorem. Nulla facilisi. Sed malesuada, risus eu varius interdum, arcu justo dignissim ex, quis varius tellus est a ipsum eu scelerisque blandit.</p>
-            <details>
-                <summary>Detalii extra despre grenada de fum (Smoke Grenade)</summary>
-                <p>Odată cu lansarea monumentală <b>Counter-Strike 2</b>, norul de fum reacționează organic și schimbă total tactica de joc clasică.</p>
+        <!-- Child 6: User Stats -> Strat Book -->
+        <section id="strat-book">
+            <h2>Strat-Book: Tactici și Statistici <i class="fa-solid fa-book-journal-whills icon-static"></i></h2>
+            <p>Aprofundează cunoștințele pe hărțile competitive și utilizează cele mai noi mecanici Counter-Strike 2.</p>
+            <details id="mirage">
+                <summary>Ghid Tactic: #mirage</summary>
+                <p>Esențial pentru aprofundare tactică: <a href="resurse/docs/harta_mirage.pdf" download="harta_mirage_oficial.pdf">Descarcă Ghidul Tactic Mirage PDF Interactiv</a>. Domină mid-ul folosind smoke-urile din spawn.</p>
             </details>
-            <details>
-                <summary>De ce sunt extrem de folosite renumitele <i>pop-flashes</i>?</summary>
-                <p>Sunt instrumente ofensive extrem de puternice, rodând fără niciun avertisment fizic, orbind inamicul direct pe locație.</p>
+            <details id="inferno">
+                <summary>Ghid Tactic: #inferno</summary>
+                <p>Banana este cheia hărții Inferno. De ce sunt extrem de folosite renumitele <i>pop-flashes</i>? Sunt instrumente ofensive extrem de puternice, rodând fără niciun avertisment fizic, orbind inamicul direct pe locație.</p>
+            </details>
+            <details id="smokes">
+                <summary>Mecanici: #smokes (Smoke Grenade)</summary>
+                <p>Odată cu lansarea monumentală <b>Counter-Strike 2</b>, norul de fum reacționează organic și schimbă total tactica de joc clasică.</p>
             </details>
         </section>
 
@@ -220,40 +159,15 @@
             
             <div class="container-iframe">
                 <div class="taburi-iframe">
-                    <a href="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" target="box_meciuri"><i class="fa-solid fa-play"></i> Highlighturi Ieri</a>
-                    <a href="https://www.youtube.com/embed/3Qnm0H6z9iM?autoplay=1" target="box_meciuri"><i class="fa-solid fa-microphone"></i> Interviuri Extrase</a>
-                    <a href="https://www.youtube.com/embed/y9EB2gVz8Z4?autoplay=1" target="box_meciuri"><i class="fa-solid fa-trophy"></i> Transmisiunea A</a>
+                    <a href="https://www.youtube.com/embed/lZ68j2H_g4Y?autoplay=1" target="box_meciuri"><i class="fa-solid fa-play"></i> Trailer Oficial CS2</a>
+                    <a href="https://www.youtube.com/embed/c80dVYcNfLE?autoplay=1" target="box_meciuri"><i class="fa-solid fa-microphone"></i> Anunț Oficial</a>
+                    <a href="https://www.youtube.com/embed/nSEVGcsXpo0?autoplay=1" target="box_meciuri"><i class="fa-solid fa-trophy"></i> Dinamica Smoke-urilor</a>
                 </div>
-                <iframe name="box_meciuri" src="https://www.youtube.com/embed/y9EB2gVz8Z4" width="560" height="315" title="Reluarea transmisiei Live Oficiale eSports" allow="fullscreen"></iframe>
+                <iframe name="box_meciuri" src="https://www.youtube.com/embed/lZ68j2H_g4Y" width="560" height="315" title="Reluarea transmisiei Live Oficiale eSports" allow="fullscreen"></iframe>
             </div>
         </article>
     </main>
 
-    <footer>
-        <address>
-            <a href="tel:+40777123456"><i class="fa-solid fa-phone"></i> Numărul de Suport Tehnic Corect: +40 777 123 456</a><br>
-            <a href="https://maps.google.com/?q=Facultatea+de+Matematică+și+Informatică,+Universitatea+din+București" target="_blank">
-                Pentru acționari, adresa fizică oficială: Facultatea de Matematică și Informatică<br>
-                Str. Academiei 14, Sector 1, Reper principal de acces<br>
-                București, România, Europa de Est
-            </a><br>
-            <a href="mailto:suport@strikehub.com"><i class="fa-solid fa-envelope"></i> Redactează un e-mail către suport@strikehub.com</a><br>
-            <a href="https://wa.me/40777123456"><i class="fa-brands fa-whatsapp"></i> Începe o recuperare cu WhatsApp direct aici în browser!</a>
-        </address>
-        
-        <a href="#sus" id="link-top" title="Revino la meniu superior Acasă">
-            <div id="triunghi"></div>
-        </a>
-        
-        <small>
-            &copy; Ediția revizuită și republicată conform cerințelor de examen practic valabil pe: <time datetime="2026-03-09">9 Martie 2026</time>. Reglementat strict sub jurisdicția legii mărcilor sub umbrela StrikeHub. Toate drepturile rezervate platformei online.
-        </small>
-        
-        <!-- css-printare: Banner dedicat exclusiv paginilor la printare -->
-        <p id="print-banner">Acesta este un proiect școlar!</p>
-    </footer>
-
-    <!-- css-printare: Watermark dedicat tuturor paginilor printate -->
-    <div id="print-watermark">Dayanch<br>Yangiyev</div>
+<%- include('../fragments/footer') %>
 </body>
 </html>
