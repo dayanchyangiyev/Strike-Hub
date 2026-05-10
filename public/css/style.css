@@ -653,3 +653,28 @@ video {
         z-index: 9999;
     }
 }
+/* --- Globale IP / User Info Styles --- */
+#user-info {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    text-align: center;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 0.5rem;
+}
+
+#user-info i {
+    color: var(--color-accent);
+}
+
+.ip-footer-section {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.ip-footer-section p {
+    color: var(--color-muted);
+    font-size: 1rem;
+}

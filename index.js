@@ -14,7 +14,7 @@ const obGlobal = {
 function initErrors() {
     const error_path = path.join(__dirname, "public", "resurse", "json", "erori.json");
     const continutFisier = fs.readFileSync(error_path, "utf-8");
-    
+
     obGlobal.obErrors = JSON.parse(continutFisier);
 
     obGlobal.obErrors.eroare_default.imagine =
@@ -30,7 +30,31 @@ initErrors();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use((req, res, next) => {
+    res.locals.ip = req.ip;
+    next();
+});
+
+app.use(function (req, res, next) {
+    if (req.path.endsWith(".ejs")) {
+        return renderError(res, 400);
+    }
+
+    next();
+});
+
+app.use(function (req, res, next) {
+    const restrictedFolders = ["/css/", "/resurse/", "/views/"];
+
+    if (restrictedFolders.some(folder => req.path.startsWith(folder)) && req.path.endsWith("/")) {
+        return renderError(res, 403);
+    }
+
+    next();
+});
+
 app.use(express.static(path.join(__dirname, "public")));
+
 
 // Create a simple route
 app.get(["/", "/index", "/home"], (req, res) => {
@@ -43,7 +67,7 @@ app.get(["/", "/index", "/home"], (req, res) => {
 
 function renderError(res, identificator, titlu, text, imagine) {
     let errorItem = obGlobal.obErrors.info_erori.find(item => item.identificator == identificator);
-    
+
     // 1 & 3: If identificator exists use it, if missing use eroare_default
     if (!errorItem) {
         let defaultError = obGlobal.obErrors.eroare_default;
@@ -56,21 +80,23 @@ function renderError(res, identificator, titlu, text, imagine) {
     } else {
         errorItem = Object.assign({}, errorItem);
     }
-    
+
     // 2: If titlu/text/imagine are given as function arguments: they override the JSON data.
     if (titlu) errorItem.titlu = titlu;
     if (text) errorItem.text = text;
     if (imagine) errorItem.imagine = obGlobal.obErrors.cale_baza + imagine;
-    
+
     // 4: If the error has status: true: set the HTTP status code
     if (errorItem.status === true) {
         res.status(errorItem.identificator);
     }
-    
+
     res.render("pages/eroare", {
         title: errorItem.titlu,
-        errorItem: errorItem,
-        imagePath: errorItem.imagine
+        identificator: errorItem.identificator,
+        titlu: errorItem.titlu,
+        text: errorItem.text,
+        image: errorItem.imagine
     });
 }
 
@@ -81,7 +107,7 @@ app.get(/(.*)/, (req, res) => {
         page = page.substring(1);
     }
 
-    res.render(`pages/${page}.ejs`, function(error, renderedResult) {
+    res.render(`pages/${page}.ejs`, function (error, renderedResult) {
         if (error) {
             if (error.message.startsWith("Failed to lookup view")) {
                 return renderError(res, 404);

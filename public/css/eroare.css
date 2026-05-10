@@ -1,0 +1,66 @@
+/* CSS for Generic Error Page */
+
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+}
+
+.error-card {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-accent);
+    border-radius: 12px;
+    margin: 2rem auto;
+}
+
+.error-id {
+    font-size: 3rem;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+}
+
+.error-title {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.error-image {
+    max-width: 100%;
+    max-height: 250px;
+    margin: 1.5rem auto;
+    border-radius: 8px;
+    display: block;
+    object-fit: contain;
+}
+
+.error-text {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.error-actions {
+    margin-top: 2.5rem;
+}
+
+.btn-home {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-accent);
+    color: var(--color-base);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-home:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 106, 0, 0.4);
+}
