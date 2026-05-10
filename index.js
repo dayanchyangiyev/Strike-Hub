@@ -12,8 +12,17 @@ const obGlobal = {
 
 
 function initErrors() {
-    const error_path = path.join(__dirname, "public/resurse/json/erori.json");
-    obGlobal.obErrors = require(error_path);
+    const error_path = path.join(__dirname, "public", "resurse", "json", "erori.json");
+    const continutFisier = fs.readFileSync(error_path, "utf-8");
+    
+    obGlobal.obErrors = JSON.parse(continutFisier);
+
+    obGlobal.obErrors.eroare_default.imagine =
+        obGlobal.obErrors.cale_baza + obGlobal.obErrors.eroare_default.imagine;
+
+    for (let eroare of obGlobal.obErrors.info_erori) {
+        eroare.imagine = obGlobal.obErrors.cale_baza + eroare.imagine;
+    }
 }
 
 initErrors();
@@ -32,31 +41,36 @@ app.get(["/", "/index", "/home"], (req, res) => {
 
 
 
-function renderError(res, identifier, title, text, image) {
-    let errorItem = obGlobal.obErrors.info_erori.find(item => item.identificator == identifier);
+function renderError(res, identificator, titlu, text, imagine) {
+    let errorItem = obGlobal.obErrors.info_erori.find(item => item.identificator == identificator);
     
-    if (!errorItem || errorItem.status === false) {
+    // 1 & 3: If identificator exists use it, if missing use eroare_default
+    if (!errorItem) {
         let defaultError = obGlobal.obErrors.eroare_default;
         errorItem = {
-            identificator: identifier || "Eroare",
-            titlu: title || defaultError.titlu,
-            text: text || defaultError.text,
-            imagine: image || defaultError.imagine
+            identificator: identificator || "Eroare",
+            titlu: defaultError.titlu,
+            text: defaultError.text,
+            imagine: defaultError.imagine
         };
     } else {
         errorItem = Object.assign({}, errorItem);
-        if (title) errorItem.titlu = title;
-        if (text) errorItem.text = text;
-        if (image) errorItem.imagine = image;
     }
     
-    const imagePath = obGlobal.obErrors.cale_baza + errorItem.imagine;
-    const statusCode = typeof identifier === 'number' ? identifier : 400;
+    // 2: If titlu/text/imagine are given as function arguments: they override the JSON data.
+    if (titlu) errorItem.titlu = titlu;
+    if (text) errorItem.text = text;
+    if (imagine) errorItem.imagine = obGlobal.obErrors.cale_baza + imagine;
     
-    res.status(statusCode).render("pages/eroare", {
+    // 4: If the error has status: true: set the HTTP status code
+    if (errorItem.status === true) {
+        res.status(errorItem.identificator);
+    }
+    
+    res.render("pages/eroare", {
         title: errorItem.titlu,
         errorItem: errorItem,
-        imagePath: imagePath
+        imagePath: errorItem.imagine
     });
 }
 
@@ -67,7 +81,7 @@ app.get(/(.*)/, (req, res) => {
         page = page.substring(1);
     }
 
-    res.render(`pages/${page}`, function(error, renderedResult) {
+    res.render(`pages/${page}.ejs`, function(error, renderedResult) {
         if (error) {
             if (error.message.startsWith("Failed to lookup view")) {
                 return renderError(res, 404);
