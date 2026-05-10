@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ro">
+<%- include('../fragments/head') %>
+<body id="sus">
+<%- include('../fragments/header') %>
+
+    <main style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center;">
+        <article style="width: 100%; max-width: 800px; padding: 2rem; background-color: var(--color-surface); border: 2px solid var(--color-accent); border-radius: 12px; margin: 2rem auto;">
+            <h2 style="font-size: 3rem; color: var(--color-accent); margin-bottom: 1rem;">
+                Eroare <%= errorItem.identificator %> <i class="fa-solid fa-triangle-exclamation"></i>
+            </h2>
+            <h3 style="font-size: 1.8rem; margin-bottom: 1rem;"><%= errorItem.titlu %></h3>
+            
+            <% if (imagePath) { %>
+                <img src="<%= imagePath %>" alt="Imagine de eroare" style="max-width: 100%; max-height: 250px; margin: 1.5rem auto; border-radius: 8px; display: block; object-fit: contain;">
+            <% } %>
+
+            <p style="font-size: 1.1rem; margin-bottom: 1rem;"><%= errorItem.text %></p>
+            
+            <div style="margin-top: 2.5rem;">
+                <a href="/" style="display: inline-block; padding: 0.75rem 1.5rem; background-color: var(--color-accent); color: var(--color-base); text-decoration: none; font-weight: bold; border-radius: 8px; font-size: 1.1rem; transition: transform 0.3s ease;">
+                    <i class="fa-solid fa-house"></i> Întoarce-te la Bază
+                </a>
+            </div>
+        </article>
+    </main>
+
+<%- include('../fragments/footer') %>
+</body>
+</html>
